@@ -12,7 +12,7 @@ export async function reportarMiMascota(req: any, res: Response): Promise<Respon
             vmascota: mascota,
             vlatitud: latitud,
             vlongitud: longitud,
-            vtipo: tipo
+            vtipo: tipo,
         }; 
         const sp = await storeProcedure(body);
         const data = sp[0][0];
