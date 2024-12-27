@@ -87,12 +87,12 @@ export async function registro(req: Request, res: Response): Promise<Response> {
             ne_nacionalidad,
             tipo
         } = req.body;
+        
         let body = {
             storeProcedure: 'registro',
             vnombre: nombre,
             vapellido: apellido,
             vcontrasena: contrasena,
-            /* vcontrasena: bcrypt.hashSync( contrasena, 10), */
             vtelefono: telefono,
             vmail: mail,
             vfechanac: fechanac,
@@ -108,9 +108,13 @@ export async function registro(req: Request, res: Response): Promise<Response> {
             vnacionalidad: nacionalidad,
             vne_nacionalidad: ne_nacionalidad,
             vtipo: tipo,
+            vlatitud: '',
+            vlongitud: '',
         };
-        /* const address = `calle ${ data.vcalle } #${ data.vnumeroe }, col. ${ data.vcolonia }, ${data.vcp}, Méx`;
+        /* const address = `calle ${ body.vcalle } #${ body.vnumeroe }, col. ${ body.vcolonia }, ${body.vcp}, Méx`;
         const dataGeometry = await Methods.getGoogleMapsGeometry(address);
+        console.log('dataGeometry', dataGeometry);
+        
         if (!dataGeometry.estatus) {
             return res.status(200).json({ 
                 estatus: false,
@@ -118,8 +122,11 @@ export async function registro(req: Request, res: Response): Promise<Response> {
             })
         }
 
-        data.vnacionalidad = dataGeometry.data.location.lat;
-        data.vlongitud = dataGeometry.data.location.lng; */
+        body.vlatitud = dataGeometry.data.location.lat;
+        body.vlongitud = dataGeometry.data.location.lng; */
+
+        body.vlatitud = '-1';
+        body.vlongitud = '1';
 
         const sp = await storeProcedure(body);
         let data = sp[0][0];
