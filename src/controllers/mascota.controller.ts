@@ -134,7 +134,7 @@ export async function actualizar(req: any, res: Response): Promise<Response> {
     }
 }
 
-// Actualizar mascota
+// Actualizar mascota con QR
 export async function actualizarQR(req: any, res: Response): Promise<Response> {  
     try {
         /* const { id } = req.usuario; */
@@ -224,13 +224,7 @@ export async function obtener(req: any, res: Response): Promise<Response> {
                 mensaje: 'Mascota no encontrada'
             });
         }
-        if (data.foto) {
-            const urlImagen = `${hostName}/api/images/mascotas/${data.foto}`;
-            data.foto = urlImagen;
-        } else {
-            const urlImagen = `${hostName}/api/images/uploads/user.png`;
-            data.foto = urlImagen;
-        }
+        
         return res.status(200).json({
             estatus: true,
             data
