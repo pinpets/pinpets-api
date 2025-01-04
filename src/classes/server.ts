@@ -14,6 +14,7 @@ import tipoMascotaRoutes from '../routes/tipo_mascota.routes';
 import razaMascotaRoutes from '../routes/raza_mascota.routes';
 import colorMascotaRoutes from '../routes/color_mascota.routes';
 import tamanoMascotaRoutes from '../routes/tamano_mascota.routes';
+import generoMascotaRoutes from '../routes/genero_mascota.routes';
 import estadoRoutes from '../routes/estado.routes';
 import nacionalidadRoutes from '../routes/nacionalidad.routes';
 import mensajeRoutes from '../routes/mensaje.routes';
@@ -84,6 +85,7 @@ export default class Server {
         this.app.use('/api/raza-mascota', razaMascotaRoutes);
         this.app.use('/api/color-mascota', colorMascotaRoutes);
         this.app.use('/api/tamano-mascota', tamanoMascotaRoutes);
+        this.app.use('/api/genero-mascota', generoMascotaRoutes);
         this.app.use('/api/mensaje', mensajeRoutes);
         this.app.use('/api/reporte', reporteRoutes);
         this.app.use('/api/reporte-qr', reporteQrRoutes);
