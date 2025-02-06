@@ -273,20 +273,18 @@ export async function codigoMail(req: any, res: Response): Promise<Response> {
             const urlImagen = `${hostName}/api/images/uploads/user.png`;
             data.foto = urlImagen;
         }
-        if (data.estatus === 'I') {
+        /* if (data.estatus === 'I') { */
             // Envia correo para verificar cuenta
             await Methods.sendMailUserVerifyAccount(data);
             return res.status(200).json({ 
                 estatus: true,
-                activo: false,
                 mensaje: 'Código enviado al email registrado',
-                token,
             });
-        }
-        return res.status(200).json({
+        /* } */
+        /* return res.status(200).json({
             estatus: true,
             data
-        });
+        }); */
     } catch (err) {
         console.log('cliente-error:', err);
         return res.status(400).json({ 
