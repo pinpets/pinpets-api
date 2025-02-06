@@ -270,7 +270,7 @@ export default class Methods {
                 transporter.sendMail(mailOptions, function (err, info) {
                     if (err) {
                         console.log(err);
-                        return reject('No se pudo enviar la contraseña');
+                        return reject('No se pudo enviar la correo');
                     }
                     return resolve('Contraseña enviada al correo registrado');
                 })
