@@ -249,7 +249,7 @@ export async function activar(req: any, res: Response): Promise<Response> {
     }
 }
 
-// Obtener cliente
+// Enviar Codigo de activacion por mail
 export async function codigoMail(req: any, res: Response): Promise<Response> {
     try {
         const { id } = req.usuario;
