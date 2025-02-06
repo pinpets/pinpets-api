@@ -45,25 +45,29 @@ export async function crear(req: any, res: Response): Promise<Response> {
         const sp = await storeProcedure(body);
         const data = sp[0][0];
         if (!data) {
-            return res.status(200).json({ 
+            return res.status(200).json({
+                id: 0, 
                 estatus: false,
                 mensaje: 'Mascota no creada'
             });
         }
         if (data.error === 1) {
             return res.status(200).json({ 
+                id: 0,
                 estatus: false,
                 mensaje: data.mensaje
             })
         }
         return res.status(200).json({
+            id: data.id,
             estatus: true,
             mensaje: 'Mascota creada correctamente'
         });
     } catch (err) {
         console.log('crear-err:', err);
         return res.status(400).json({ 
-            status: false,
+            id: 0,
+            estatus: false,
             mensaje: '¡Error! Crear mascota'
         });
     }
@@ -72,7 +76,6 @@ export async function crear(req: any, res: Response): Promise<Response> {
 // Actualizar mascota
 export async function actualizar(req: any, res: Response): Promise<Response> {  
     try {
-        /* const { id } = req.usuario; */
         const { 
             color,
             ne_color,
@@ -104,7 +107,6 @@ export async function actualizar(req: any, res: Response): Promise<Response> {
             vsenas_particulares: senas_particulares,
             vtamano: tamano,
             vne_tamano: ne_tamano,
-            /* vusuario: id, */
             vid: idMascota,
         };
         const sp = await storeProcedure(body);
@@ -137,7 +139,6 @@ export async function actualizar(req: any, res: Response): Promise<Response> {
 // Actualizar mascota con QR
 export async function actualizarQR(req: any, res: Response): Promise<Response> {  
     try {
-        /* const { id } = req.usuario; */
         const { 
             qr,
             idMascota,
@@ -145,7 +146,6 @@ export async function actualizarQR(req: any, res: Response): Promise<Response> {
         const body = {
             storeProcedure: 'actualizarQR',
             vqr: qr,
-            /* vusuario: id, */
             vid: idMascota,
         };
         const sp = await storeProcedure(body);
