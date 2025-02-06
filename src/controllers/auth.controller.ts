@@ -254,7 +254,7 @@ export async function codigoMail(req: any, res: Response): Promise<Response> {
     try {
         const { id } = req.usuario;
         const body = {
-            storeProcedure: 'perfil',
+            storeProcedure: 'codigoMail',
             vid: id
         }; 
         const sp = await storeProcedure(body);
@@ -265,26 +265,20 @@ export async function codigoMail(req: any, res: Response): Promise<Response> {
                 mensaje: 'Cliente no encontrado'
             });
         }
-        data.pass = ':)';
-        if (data.foto) {
-            const urlImagen = `${hostName}/api/images/usuarios/${data.foto}`;
-            data.foto = urlImagen;
-        } else {
-            const urlImagen = `${hostName}/api/images/uploads/user.png`;
-            data.foto = urlImagen;
-        }
-        /* if (data.estatus === 'I') { */
+        
+        if (data.estatus === 'I') {
             // Envia correo para verificar cuenta
             await Methods.sendMailUserVerifyAccount(data);
             return res.status(200).json({ 
                 estatus: true,
                 mensaje: 'Código enviado al email registrado',
             });
-        /* } */
-        /* return res.status(200).json({
+        }
+        return res.status(200).json({
             estatus: true,
-            data
-        }); */
+            mensaje: data.mensaje
+            
+        });
     } catch (err) {
         console.log('cliente-error:', err);
         return res.status(400).json({ 

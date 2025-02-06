@@ -259,11 +259,7 @@ export default class Methods {
     static sendMailUserVerifyAccount(context: any): Promise<string> {
         return new Promise(async (resolve, reject) => {
             try {
-                /* const { emailConfig } = await Methods.configuracion(); */
                 const emailConfig = config.getEmail();
-                console.log('emailConfig', emailConfig);
-                console.log('context', context);
-                
                 let transporter = nodemailer.createTransport(emailConfig);
                 const mailOptions = {
                     from: `PINPETS ${emailConfig.auth.user}`,
