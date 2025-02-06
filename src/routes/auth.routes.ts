@@ -12,6 +12,7 @@ import {
     token,
     subirFotoPerfil,
     recuperarPassMail,
+    codigoMail,
 } from '../controllers/auth.controller';
 
 const router = Router();
@@ -21,6 +22,7 @@ router.post( '/login', login );
 router.post( '/registro', registro );
 router.post( '/recuperar-pass-mail', recuperarPassMail );
 router.post( '/activar', verifyToken, activar );
+router.get( '/codigo-mail', verifyToken, codigoMail );
 router.post( '/cambiar-pass', verifyToken, cambiarPass );
 router.put( '/actualizar', verifyToken, actualizar );
 router.get( '/obtener', verifyToken, obtener );

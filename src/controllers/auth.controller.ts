@@ -250,6 +250,53 @@ export async function activar(req: any, res: Response): Promise<Response> {
 }
 
 // Obtener cliente
+export async function codigoMail(req: any, res: Response): Promise<Response> {
+    try {
+        const { id } = req.usuario;
+        const body = {
+            storeProcedure: 'perfil',
+            vid: id
+        }; 
+        const sp = await storeProcedure(body);
+        let data = sp[0][0];
+        if (!data) {
+            return res.status(200).json({ 
+                estatus: false,
+                mensaje: 'Cliente no encontrado'
+            });
+        }
+        data.pass = ':)';
+        if (data.foto) {
+            const urlImagen = `${hostName}/api/images/usuarios/${data.foto}`;
+            data.foto = urlImagen;
+        } else {
+            const urlImagen = `${hostName}/api/images/uploads/user.png`;
+            data.foto = urlImagen;
+        }
+        if (data.estatus === 'I') {
+            // Envia correo para verificar cuenta
+            await Methods.sendMailUserVerifyAccount(data);
+            return res.status(200).json({ 
+                estatus: true,
+                activo: false,
+                mensaje: 'Código enviado al email registrado',
+                token,
+            });
+        }
+        return res.status(200).json({
+            estatus: true,
+            data
+        });
+    } catch (err) {
+        console.log('cliente-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! cliente no encontrado'
+        });
+    }
+}
+
+// Obtener cliente
 export async function obtener(req: any, res: Response): Promise<Response> {
     try {
         const { id } = req.usuario;
