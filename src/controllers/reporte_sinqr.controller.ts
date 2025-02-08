@@ -125,6 +125,7 @@ export async function reportarEncontreMascotaSinQR(req: any, res: Response): Pro
         const data = sp[0][0];
         return res.status(200).json({
             estatus: true,
+            id: data.id,
             data
         });
     } catch (err) {
