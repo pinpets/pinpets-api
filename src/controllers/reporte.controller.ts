@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { storeProcedure } from '../classes/database';
 
-// Reportar mi mascota (FALTA POR TERMINAR PSAUMIS)
+// Reportar mi mascota 
 export async function reportarMiMascota(req: any, res: Response): Promise<Response> {
     try {
         const { id } = req.usuario;
@@ -25,6 +25,34 @@ export async function reportarMiMascota(req: any, res: Response): Promise<Respon
         return res.status(400).json({ 
             estatus: false,
             mensaje: '¡Error! Reportar mi mascota'
+        });
+    }
+}
+
+// Reportar encontre mascota 
+export async function reportarEncontreMascota(req: any, res: Response): Promise<Response> {
+    try {
+        const { id: idUsuario } = req.usuario;
+        const { id, latitud, longitud, tipo } = req.body;
+        const body = {
+            storeProcedure: 'AvisarEncontreMascota',
+            vusuario: idUsuario,
+            vid: id,
+            vlatitud: latitud,
+            vlongitud: longitud,
+            vtipo: tipo,
+        }; 
+        const sp = await storeProcedure(body);
+        const data = sp[0][0];
+        return res.status(200).json({
+            estatus: true,
+            data
+        });
+    } catch (err) {
+        console.log('reportarEncontreMascota-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Reportar encontre mascota'
         });
     }
 }
