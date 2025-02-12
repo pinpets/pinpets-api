@@ -57,6 +57,31 @@ export async function reportarEncontreMascota(req: any, res: Response): Promise<
     }
 }
 
+// Reportar en mi mascota 
+export async function reportarEsMiMascota(req: any, res: Response): Promise<Response> {
+    try {
+        const { id: idUsuario } = req.usuario;
+        const { id } = req.body;
+        const body = {
+            storeProcedure: 'AvisarMascotaEsMia',
+            vusuario: idUsuario,
+            vid: id,
+        };
+        const sp = await storeProcedure(body);
+        const data = sp[0][0];
+        return res.status(200).json({
+            estatus: true,
+            data
+        });
+    } catch (err) {
+        console.log('reportarEncontreMascota-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Reportar encontre mascota'
+        });
+    }
+}
+
 // Reportes
 export async function reportes(req: Request, res: Response): Promise<Response> {
     try {
