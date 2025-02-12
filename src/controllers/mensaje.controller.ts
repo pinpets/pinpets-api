@@ -180,7 +180,7 @@ export async function numeroChatsPendientesLeer(req: any, res: Response): Promis
             vusuario: id
         }; 
         const sp = await storeProcedure(body);
-        const data = sp[0];
+        const data = sp[0][0];
         return res.status(200).json({
             estatus: true,
             data
