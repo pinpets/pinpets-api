@@ -110,9 +110,10 @@ export async function mensajesChatUsuario(req: any, res: Response): Promise<Resp
         }; 
         const sp = await storeProcedure(body);
         const data = sp[0];
+        const [ item ] = data;
         return res.status(200).json({
             estatus: true,
-            name: data[0].usuario,
+            name: item.usuario,
             data
         });
     } catch (err) {
