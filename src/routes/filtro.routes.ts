@@ -5,6 +5,6 @@ import { listaRazaColor, listaTipoGeneroTamano } from '../controllers/filtros.co
 const router = Router();
 
 router.get( '/lista-tipo-genero-tamano', verifyToken, listaTipoGeneroTamano );
-router.get( '/lista-raza-color', verifyToken, listaRazaColor );
+router.post( '/lista-raza-color', verifyToken, listaRazaColor );
 
 export default router;
