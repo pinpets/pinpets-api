@@ -24,6 +24,7 @@ import reporteQrRoutes from '../routes/reporte_qr.routes';
 import detelleReporteRoutes from '../routes/detelle_reporte.routes';
 import imageRoutes from '../routes/image.routes';
 import Configurations from '../config/config';
+import filtroRoutes from '../routes/filtro.routes';
 
 const config = new Configurations();
 
@@ -86,6 +87,7 @@ export default class Server {
         this.app.use('/api/color-mascota', colorMascotaRoutes);
         this.app.use('/api/tamano-mascota', tamanoMascotaRoutes);
         this.app.use('/api/genero-mascota', generoMascotaRoutes);
+        this.app.use('/api/filtro', filtroRoutes);
         this.app.use('/api/mensaje', mensajeRoutes);
         this.app.use('/api/reporte', reporteRoutes);
         this.app.use('/api/reporte-qr', reporteQrRoutes);
