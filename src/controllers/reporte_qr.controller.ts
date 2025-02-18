@@ -114,3 +114,34 @@ export async function reportarEncontreMascotaQR(req: any, res: Response): Promis
         });
     }
 }
+
+// Reportar encontre mascota QR
+export async function avisarEncontreQR(req: any, res: Response): Promise<Response> {
+    try {
+        const { id } = req.usuario;
+        const {
+            qr,
+            latitud,
+            longitud
+        } = req.body;
+        const body = {
+            storeProcedure: 'AvisarEncontreQR',
+            vusuario: id,
+            vqr: qr,
+            vlatitud: latitud,
+            vlongitud: longitud
+        }; 
+        const sp = await storeProcedure(body);
+        const data = sp[0][0];
+        return res.status(200).json({
+            estatus: true,
+            data
+        });
+    } catch (err) {
+        console.log('avisarEncontreQR-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Avisar encontre QR'
+        });
+    }
+}
