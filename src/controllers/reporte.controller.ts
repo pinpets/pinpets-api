@@ -83,11 +83,13 @@ export async function reportarEsMiMascota(req: any, res: Response): Promise<Resp
 }
 
 // Reportes
-export async function reportes(req: Request, res: Response): Promise<Response> {
+export async function reportes(req: any, res: Response): Promise<Response> {
     try {
+        const { id } = req.usuario;
         const { tipo } = req.body;
         const body = {
             storeProcedure: 'reportes',
+            vusario: id,
             vtipo: tipo
         }; 
         const sp = await storeProcedure(body);
