@@ -107,7 +107,7 @@ export async function verFiltros(req: any, res: Response): Promise<Response> {
         };
         
         const sp = await storeProcedure(body);
-        const data = sp[0];
+        const data = sp[0][0];
         return res.status(200).json({
             estatus: true,
             data: data,
