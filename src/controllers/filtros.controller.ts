@@ -33,6 +33,7 @@ export async function listaTipoGeneroTamano(req: Request, res: Response): Promis
         });
     }
 }
+
 // Filtro lista de razas y colores de mascotas
 export async function listaRazaColor(req: Request, res: Response): Promise<Response> {
     try {
@@ -59,6 +60,89 @@ export async function listaRazaColor(req: Request, res: Response): Promise<Respo
         return res.status(400).json({ 
             estatus: false,
             mensaje: '¡Error! Lista razas y colores de mascotas'
+        });
+    }
+}
+
+// Aplicar Filtros
+export async function aplicarFiltros(req: any, res: Response): Promise<Response> {
+    try {
+        const { id } = req.usuario;
+        const { tipo, raza, color, sexo, tamano } = req.body;
+        
+        const body = {
+            storeProcedure: 'AplicarFiltros',
+            vusuario: id,
+            vtipo: tipo,
+            vraza: raza,
+            vcolor: color,
+            vsexo: sexo,
+            vtamano: tamano,
+        };
+        
+        const sp = await storeProcedure(body);
+        const data = sp[0][0];
+        return res.status(200).json({
+            estatus: true,
+            data: data,
+        });
+    } catch (err) {
+        console.log('lista-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Aplicar filtros de mascotas'
+        });
+    }
+}
+
+// Ver Filtros
+export async function verFiltros(req: any, res: Response): Promise<Response> {
+    try {
+        
+        const { id } = req.usuario;
+        
+        const body = {
+            storeProcedure: 'VerFiltros',
+            vusuario: id,
+        };
+        
+        const sp = await storeProcedure(body);
+        const data = sp[0];
+        return res.status(200).json({
+            estatus: true,
+            data: data,
+        });
+    } catch (err) {
+        console.log('lista-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Ver filtros de mascotas'
+        });
+    }
+}
+
+// Limpiar Filtros
+export async function limpiarFiltros(req: any, res: Response): Promise<Response> {
+    try {
+        
+        const { id } = req.usuario;
+        
+        const body = {
+            storeProcedure: 'LimpiarFiltros',
+            vusuario: id,
+        };
+        
+        const sp = await storeProcedure(body);
+        const data = sp[0][0];
+        return res.status(200).json({
+            estatus: true,
+            data: data,
+        });
+    } catch (err) {
+        console.log('lista-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Limpiar filtros de mascotas'
         });
     }
 }
