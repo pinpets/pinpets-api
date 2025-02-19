@@ -89,7 +89,7 @@ export async function reportes(req: any, res: Response): Promise<Response> {
         const { tipo } = req.body;
         const body = {
             storeProcedure: 'reportes',
-            vusario: id,
+            vusuario: id,
             vtipo: tipo
         }; 
         const sp = await storeProcedure(body);
