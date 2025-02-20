@@ -25,6 +25,7 @@ import detelleReporteRoutes from '../routes/detelle_reporte.routes';
 import imageRoutes from '../routes/image.routes';
 import Configurations from '../config/config';
 import filtroRoutes from '../routes/filtro.routes';
+import comboRoutes from '../routes/combo.routes';
 
 const config = new Configurations();
 
@@ -82,6 +83,7 @@ export default class Server {
         this.app.use('/api/nacionalidad', nacionalidadRoutes);
         this.app.use('/api/configuracion', configuracionRoutes);
         this.app.use('/api/mascota', mascotaRoutes);
+        this.app.use('/api/combo', comboRoutes);
         this.app.use('/api/tipo-mascota', tipoMascotaRoutes);
         this.app.use('/api/raza-mascota', razaMascotaRoutes);
         this.app.use('/api/color-mascota', colorMascotaRoutes);
