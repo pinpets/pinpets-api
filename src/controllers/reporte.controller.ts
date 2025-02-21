@@ -134,3 +134,26 @@ export async function encontraronMiMascotaReportada(req: any, res: Response): Pr
         });
     }
 }
+
+// Detalle Reporte
+export async function reporteDetalle(req: any, res: Response): Promise<Response> {
+    try {
+        const { reporte } = req.body;
+        const body = {
+            storeProcedure: 'reportes_det',
+            vreporte: reporte
+        }; 
+        const sp = await storeProcedure(body);
+        const data = sp[0];
+        return res.status(200).json({
+            estatus: true,
+            data
+        });
+    } catch (err) {
+        console.log('reportes-error:', err);
+        return res.status(400).json({ 
+            estatus: false,
+            mensaje: '¡Error! Reportes'
+        });
+    }
+}

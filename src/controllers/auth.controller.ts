@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import path from 'path';
-import bcrypt from 'bcryptjs'
 import { storeProcedure } from '../classes/database';
 import Methods from '../classes/methods';
 import { upload } from './image.controller';
@@ -111,7 +110,7 @@ export async function registro(req: Request, res: Response): Promise<Response> {
             vlatitud: '',
             vlongitud: '',
         };
-        /* const address = `calle ${ body.vcalle } #${ body.vnumeroe }, col. ${ body.vcolonia }, ${body.vcp}, Méx`;
+        const address = `calle ${ body.vcalle } #${ body.vnumeroe }, col. ${ body.vcolonia }, ${body.vcp}, Méx`;
         const dataGeometry = await Methods.getGoogleMapsGeometry(address);
         console.log('dataGeometry', dataGeometry);
         
@@ -123,10 +122,10 @@ export async function registro(req: Request, res: Response): Promise<Response> {
         }
 
         body.vlatitud = dataGeometry.data.location.lat;
-        body.vlongitud = dataGeometry.data.location.lng; */
+        body.vlongitud = dataGeometry.data.location.lng;
 
-        body.vlatitud = '-1';
-        body.vlongitud = '1';
+        /* body.vlatitud = '-1';
+        body.vlongitud = '1'; */
 
         const sp = await storeProcedure(body);
         let data = sp[0][0];
