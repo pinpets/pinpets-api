@@ -145,9 +145,18 @@ export async function reporteDetalle(req: any, res: Response): Promise<Response>
         }; 
         const sp = await storeProcedure(body);
         const data = sp[0];
+        let coordenadas = [];
+        for (const d of data) {
+            coordenadas.push({
+                lotengo: d.lotengo,
+                lat: d.latitud,
+                lng: d.longitud
+            });
+        }
         return res.status(200).json({
             estatus: true,
-            data
+            reporte: data[0],
+            coords: coordenadas
         });
     } catch (err) {
         console.log('reportes-error:', err);
